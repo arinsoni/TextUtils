@@ -1,4 +1,4 @@
-# You can see the deply here 
+# You can see the deployment here 
 [https://textutils-arinsoni.netlify.app/](url)
 # Getting Started with Create React App
 
