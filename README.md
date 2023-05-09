@@ -1,5 +1,5 @@
 # You can see the deployment here 
-[https://textutils-arinsoni.netlify.app/](url)
+[TextUtils](https://textutils-arinsoni.netlify.app/about)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
