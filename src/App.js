@@ -25,68 +25,46 @@ function App() {
 
   // Dark and Light Mode
   const [mode, setMode] = useState('light');
-
-  const [clr, setClr] = useState('lightgrey');
-  const [abtHeadClr, setAbtHeadClr] = useState('coral')
-
-  
-  
-
   const toggleMode = () => {
     if (mode === 'dark') {
-
       setMode('light');
-      setClr('lightgrey');
-      setAbtHeadClr('coral');
       document.body.style.backgroundColor = 'white';
       showAlert("Light Mode Enabled", "success");
     }
-
-
     else {
       setMode('dark');
-      setClr('black');
-      setAbtHeadClr('gray');
-
-      document.body.style.backgroundColor = '#333333';
+      document.body.style.backgroundColor = '#0B0C10';
       showAlert("Dark Mode Enabled", "success");
     }
 
   }
   const toggle1 = () => {
     
-    if (mode === 'light' || mode === 'dark') {
-      
+    if (mode === 'light' || mode === 'dark') { 
       setMode('dark2');
-      setClr('#00224e');
-      setAbtHeadClr('cyan');
       document.body.style.backgroundColor = '#4c408e';
       showAlert("Light Mode Enabled", "success");
     }
 
     else if (mode === 'dark2') {
       setMode('light');
-      setClr('lightgrey');
-      setAbtHeadClr('coral');
       document.body.style.backgroundColor = 'white';
       showAlert("Light Mode Enabled", "success");
     }
     
   }
 
-
-
   return (
     <>
       <Router>
-        <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} clr={clr} toggle1={toggle1} />
+        <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} toggle1={toggle1} />
         <Alerts alert={alert} />
         <div className="container my-3" >
           <Routes>
-            <Route exact path="/about" element={<About mode={mode} abtHeadClr={abtHeadClr} />} />
+            <Route exact path="/about" element={<About mode={mode} />} />
           </Routes>
           <Routes>
-            <Route exact path="/" element={<TextForm heading="Word Analyzer" mode={mode} showAlert={showAlert} clr={clr} toggle1={toggle1} />
+            <Route exact path="/" element={<TextForm heading="Word Analyzer" mode={mode} showAlert={showAlert} toggle1={toggle1} />
             } />
           </Routes>
 

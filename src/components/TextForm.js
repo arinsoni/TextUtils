@@ -48,17 +48,12 @@ export default function TextForm(props) {
     const [text, setText] = useState('');
     const word = text.split(" ").length == 1 ? 'word' : 'words';
 
-    const [cnt, setCnt] = useState('');
-    function countWords(text){
-        let x = 0;
-        text = String(text);
-        let y = text.split(" ");
-        for(let i=0;i<y.length; i++){
-            if(y[i] != ""){
-                x = x + 1;
-            }
-        }
-        setCnt(x);
+    
+
+    let btnStyle = {
+        color: props.mode === 'light' ? 'black' : props.mode  === 'dark2' ? 'black': 'white',
+        border: '1px solid',
+        backgroundColor: props.mode === 'light' ? 'lightgray' : props.mode === 'dark2' ? 'cyan' : 'gray',
 
     }
 
@@ -71,7 +66,7 @@ export default function TextForm(props) {
                     <div className="form-group">
                         <textarea
                             className="form-control"
-                            style={{ backgroundColor: props.mode === 'light'? 'white' : 'lightgrey', color: props.mode === 'dark' ? 'black' : 'light', }}
+                            style={{ backgroundColor: props.mode === 'light'? 'white' : props.mode === 'dark2' ? 'lightcyan' : 'gray', color: props.mode === 'dark' ? 'black' : 'light', }}
                             id="myBox"
                             value={text}
                             placeholder="Enter your text"
@@ -84,32 +79,27 @@ export default function TextForm(props) {
 
             <div className="text-center" >
 
-                <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{backgroundColor: props.mode === 'light' ? 'lightgrey' : 'lightgrey', color: props.mode === 'light' ? 'black' : 'black'}}>
+                <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={btnStyle}>
                     Dropdown button
                 </button>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{backgroundColor: props.mode === 'light' ? 'grey' : '#00224e'}}>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
                     <li  ><a className="dropdown-item" onClick={handleUpClick}  style = {{color: props.mode === 'light' ? 'white' : 'black'}}>Convert to Uppercase</a></li>
                     <li><a className="dropdown-item" onClick={handleLowClick} style={{color: props.mode === 'light' ? 'white' : 'black'}}>Convert to Lowercase</a></li>
                 </ul>
 
-                <button className="btn btn-primary my-3 mx-1" onClick={downloadTxtFile} style={{backgroundColor: props.mode === 'light' ? 'lightgrey' : 'lightgrey', color: props.mode === 'light' ? 'black' : 'black'}}>Download text File</button>
-                <button className="btn btn-primary my-3 mx-1" onClick={clearText} style={{backgroundColor: props.mode === 'light' ? 'lightgrey' : 'lightgrey', color: props.mode === 'light' ? 'black' : 'black'}} >Clear text</button>
-                <button className="btn btn-primary my-3 mx-1" onClick={handleCopy} style={{backgroundColor: props.mode === 'light' ? 'lightgrey' : 'lightgrey', color: props.mode === 'light' ? 'black' : 'black'}}>Copy text</button>
-                <button className="btn btn-primary my-3 mx-1" onClick={handleExtraSpaces} style={{backgroundColor: props.mode === 'light' ? 'lightgrey' : 'lightgrey', color: props.mode === 'light' ? 'black' : 'black'}}>Remove Extra Spaces</button>
+                <button disabled = {text.length === 0} className="btn btn-primary my-3 mx-1" onClick={downloadTxtFile} style={btnStyle}>Download text File</button>
+                <button disabled = {text.length === 0} className="btn btn-primary my-3 mx-1" onClick={clearText} style={btnStyle} >Clear text</button>
+                <button disabled = {text.length === 0} className="btn btn-primary my-3 mx-1" onClick={handleCopy} style={btnStyle}>Copy text</button>
+                <button disabled = {text.length === 0} className="btn btn-primary my-3 mx-1" onClick={handleExtraSpaces} style={btnStyle}>Remove Extra Spaces</button>
             </div>
             <div className="container" style={{ color: props.mode === 'light'  ? 'black' : 'white' }}>
                 <h2>Your text summary</h2>
                 <p> {text.split(/\s+/).filter((element)=>{return element.length!==0}).length} <b>{word}</b> and {text.length} <b>characters</b>
                 </p>
-                <p>{0.008 * text.split(" ").length} Minutes read</p>
+                <p>{0.008 * text.split(/\s+/).filter((element)=>{return element.length!==0}).length} Minutes read</p>
                 <h2>Preview</h2>
                 <p>{text.length > 0 ? text : 'Enter Your text to Preview'}</p>
             </div>
-
-
-
-
-
         </>
     );
 }
