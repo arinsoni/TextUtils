@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AIFeatures from './AIFeatures';
 
 
 export default function TextForm(props) {
@@ -46,7 +47,7 @@ export default function TextForm(props) {
     }
 
     const [text, setText] = useState('');
-    const word = text.split(" ").length == 1 ? 'word' : 'words';
+    const word = text.split(" ").length === 1 ? 'word' : 'words';
 
     
 
@@ -99,6 +100,7 @@ export default function TextForm(props) {
                 <p>{0.008 * text.split(/\s+/).filter((element)=>{return element.length!==0}).length} Minutes read</p>
                 <h2>Preview</h2>
                 <p>{text.length > 0 ? text : 'Enter Your text to Preview'}</p>
+                <AIFeatures text={text} mode={props.mode} showAlert={props.showAlert} />
             </div>
         </>
     );
